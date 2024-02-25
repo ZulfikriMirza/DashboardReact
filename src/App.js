@@ -25,7 +25,7 @@ const App = () => {
                 <FiSettings />
               </button>
             </TooltipComponent> 
-            
+            asdwqae
           </div>
           {activeMenu ? (
               <div className='w-72 fixed sidebar 
