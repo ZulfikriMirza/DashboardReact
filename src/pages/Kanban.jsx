@@ -2,9 +2,7 @@ import React from 'react'
 
 const Kanban = () => {
   return (
-    <div>
-      
-    </div>
+    <div>Kanban</div>
   )
 }
 
