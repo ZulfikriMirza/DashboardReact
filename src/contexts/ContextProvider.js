@@ -8,3 +8,5 @@ const initialState = {
     user: false,
     notification: false,
 }
+
+export const ContextProvider = ({})
