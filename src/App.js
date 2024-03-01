@@ -10,10 +10,10 @@ import './App.css'
 import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
-  const { activeMenu } = useStateContext();
+  const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
 
   return (
-    <div>
+    <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
         <div className='flex relative dark:bg-main-dark-bg'>
           <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
@@ -21,7 +21,8 @@ const App = () => {
               <button type="button"
               className="text-3xl p-3 hover:drop-shadow-xl
               hover:bg-light-gray text-white"
-              style={{ background: 'blue',
+              onClick={() => setThemeSettings(true)}
+              style={{ background: currentColor,
               borderRadius: '50%' }}>
                 <FiSettings />
               </button>
@@ -33,14 +34,17 @@ const App = () => {
                 <Sidebar />
               </div>
             ): (
-              <div className="w-0
+            <div className="w-0
               dark: bg-secondary-dark-bg">
                 <Sidebar />
               </div>
             )}
             <div className={
-              `dark:bg-main-bg bg-main-bg 
-              min-h-screen w-full ${activeMenu ? 'md: ml-72 w-full': 'flex-2'}`
+              `dark:bg-main-dark-bg bg-main-bg 
+              min-h-screen w-full 
+              ${activeMenu 
+                ? 'md: ml-72 w-full'
+                : 'flex-2'}`
             }>
 
               <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg
@@ -50,10 +54,12 @@ const App = () => {
 
 
             <div>
-              <ThemeSettings />
+              {themeSettings && <ThemeSettings />}
 
 
               <Routes>
+
+
                   {/* dashboard  */}
                   <Route path="/" element={(<Ecommerce />)} />
                   <Route path="/ecommerce" element={(<Ecommerce />)} />
