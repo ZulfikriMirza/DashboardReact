@@ -35,8 +35,10 @@ export const ContextProvider = ({ children }) => {
         setThemeSettings(false);
     }
     const handleClick = (clicked) => {
-        setIsClicked({ ...initialState, [clicked]: 
-        true});
+        setIsClicked((initialState) => ({ 
+            ...initialState, 
+            [clicked]: !initialState[clicked]
+        }));
     }
 
     return (

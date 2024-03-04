@@ -16,7 +16,7 @@ const ThemeSettings = () => {
       <div className='float-right h-screen dark:text-gray-200 bg-white dark:[#484852]
       w-400'>
         <div className='flex justify-between items-center p-4 ml-4'>
-          <p className='font-semibold text-xl'>Settings</p>
+          <p className='font-semibold text-xl dark:text-black'>Settings</p>
           <button
             type='button'
             onClick={() => setThemeSettings(false)}
@@ -29,9 +29,9 @@ const ThemeSettings = () => {
         </div>
 
         <div className='flex-col border-t -1 border-color p-4 ml-4'>
-          <p>Theme Options</p>
+          <p className='font-bold dark:text-black'>Theme Options</p>
 
-          <div className="mt-4">
+          <div className="mt-4 dark:text-black">
             <input
             type="radio"
             id="light"
@@ -47,24 +47,25 @@ const ThemeSettings = () => {
               </label>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 dark:text-black">
             <input
             type="radio"
             id="dark"
             name="theme"
-Dark            className='cursor-pointer'
+            value="Dark"
+            className='cursor-pointer'
             onChange={setMode}
-            checked={currentMode === 'Dark'}
+            checked={currentMode === 'dark'}
               />
               <label htmlFor='dark'
               className="ml-2 text-md cursor-pointer">
                   Dark
               </label>
-          </div>
+            </div>
         </div>
 
         <div className='flex-col border-t -1 border-color p-4 ml-4'>
-          <p className='font-semibold text-lg'>Theme Options</p>
+          <p className='font-semibold text-lg dark:text-black'>Theme Options</p>
           <div className="flex gap-3">
             {themeColors.map((item, index) => (
               <TooltipComponent key={index}
