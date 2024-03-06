@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const StateContext = createContext();
 
@@ -34,12 +34,35 @@ export const ContextProvider = ({ children }) => {
 
         setThemeSettings(false);
     }
+
     const handleClick = (clicked) => {
-        setIsClicked((initialState) => ({ 
-            ...initialState, 
-            [clicked]: !initialState[clicked]
-        }));
-    }
+        setIsClicked((prevState) => {
+            const updatedState = { ...initialState, [clicked]: true};
+            Object.keys(updatedState).forEach((key) => {
+                if(key !== clicked) {
+                    updatedState[key] = false;
+                }
+                });
+            return updatedState;
+        });
+    };
+
+
+    useEffect(() => {
+        const handleStateChange = (e) => {
+            const clickedInsideChat = e.target.closest('#chat-area')
+            
+            if(!clickedInsideChat && Object.values(isClicked).some((value) => value)) {
+                setIsClicked(initialState)
+            }
+        }
+
+        document.body.addEventListener('click', handleStateChange);
+
+        return () => {
+            document.body.removeEventListener('click', handleStateChange);
+        }
+    }, [isClicked, initialState]);
 
     return (
         <StateContext.Provider
